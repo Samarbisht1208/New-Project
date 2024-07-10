@@ -1,0 +1,44 @@
+{% extends "transcart/layout.html" %}
+
+{% block body %}
+
+    <h1>Listing: {{ listing_content_placeholder.name }}</h1>
+    <div class="row mx-3">
+        <!-- adding or removing from watchlist -->
+        {% if user.is_authenticated %}
+            {% if is_owner_placeholder %}
+                <div>
+
+                </div>
+            {% else %}
+                {% if is_listing_in_watchlistlist_placeholder %}
+                    <form action="{% url 'remove' id=listing_content_placeholder.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-danger">Remove From Watchlist</button>
+                    </form>
+                {% else %}
+                <form action="{% url 'add' id=listing_content_placeholder.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-success">Add To Watchlist</button>
+                </form>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </div>
+    <br>
+
+    <!-- listing Details -->
+    <img src="{{ listing_content_placeholder.imageURL }}" style="height: 400px; width: auto;" alt="{{ listing_content_placeholder.title }}">
+    <p><strong>{{ listing_content_placeholder.name }}</strong></p>
+    <h6><strong>₹{{ listing_content_placeholder.prize }}</strong></h6>
+
+    <br>
+    <br>
+    <h2>Details</h2>
+    <ul>
+        <li><strong>Listed By:</strong> {{ listing_content_placeholder.owner }}</li>
+    </ul>
+    <br>
+    <br>
+
+{% endblock %}

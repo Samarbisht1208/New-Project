@@ -1,0 +1,29 @@
+{% extends "transcart/layout.html" %}
+
+{% block body %}
+<div>
+    <a href="{% url 'login' %}">User</a>
+    <a href="{% url 'vender_login' %}">Vender</a>
+    <a href="/admin">Admin</a>
+</div>
+    <h2>User Login</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <input name="type" type="hidden" value="normal_user">
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Login">
+    </form>
+
+    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+
+{% endblock %}

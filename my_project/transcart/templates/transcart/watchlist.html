@@ -1,0 +1,21 @@
+{% extends "transcart/layout.html" %}
+
+{% block body %}
+<h2>Cart</h2>
+<br>
+<br>
+
+<div class="row mx-3">
+    {% for i in content_placeholder %}
+        <div class="card mx-3" style="width: 18rem;">
+            <img src="{{ i.imageURL }}" class="card-img-top" alt="{{ i.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ i.name }}</h5>
+                <p class="card-title">₹{{ i.prize.bid }}</p>
+                <a href="{% url 'listing' id=i.id %}" class="btn btn-primary">Details</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
